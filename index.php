@@ -1,9 +1,12 @@
 <?php
+//die('ter');
+define('DS','\\');
 class RouterFactory
 {
     public static function build($controller)
     {
         $class = ucfirst($controller).'Controller';
+        include('controller'.DS.$class.'.php');
         if (class_exists($class)) {
             return new $class();
         } else {
@@ -12,61 +15,42 @@ class RouterFactory
     }
 }
 
-class AppController
+class App
 {
-    public $respons = null;
 
-    public function __construct(){
-
-    }
+//    public function __construct(){
+//
+//    }
 
     public function run(){
-        $this->respons = 'respons';
+//        var_dump($url_param);
+//        die('die');
         $url = $_SERVER['REQUEST_URI'].'/';
         $url_param = array();
         preg_match_all('([^\/]+)', $url, $url_param); // ([^\/]+)  ([*/]\w+)
         $url_param = $url_param[0];
-        //var_dump($url_param);
+
         $controller = $url_param[1];
         $action = $url_param[2];
-        $product = RouterFactory::build($controller);
-        var_dump($product->getRespons());
-        echo 'Controller:'.$controller.'<br>action:'.$product->{$action}();
+        $run = RouterFactory::build($controller);
+        $run->{$action}();
+//        var_dump($product->getRespons());
+//        echo 'Controller:'.$controller.'<br>action:'.$product->{$action}();
     }
 
 }
 
-class MainController extends AppController
-{
-    private $name = 'Table';
-    public $respons = null;
 
-    public function __construct(){
 
-    }
 
-    public function getName()
-    {
-        return $this->name;
-    }
 
-    public function getRespons(){
-        return $this->respons;
-    }
-}
 
-class SecondController extends AppController
-{
-    private $name = 'Phone';
-    public function getName()
-    {
-        return $this->name;
-    }
-}
 
-$main = new AppController();
-$main->run();
-
+$app = new App();
+$app->run();
+exit;
+//$test = new MainController();
+//echo $test->getRespons();
 
 
 ?>
