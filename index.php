@@ -1,12 +1,11 @@
 <?php
 class RouterFactory
 {
-    public static function build($controller) //,  $sku, $name)
+    public static function build($controller)
     {
         $class = ucfirst($controller).'Controller';
-//        var_dump($class);die;
         if (class_exists($class)) {
-            return new $class(); //$sku, $name);
+            return new $class();
         } else {
             throw new \Exception("Class epsent!!!");
         }
