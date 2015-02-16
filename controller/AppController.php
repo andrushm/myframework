@@ -1,6 +1,7 @@
 <?php
 //define('DS','\\');
 require_once('lib'.DS.'Core'.DS.'view.php');
+require_once('model'.DS.'Model.php');
 
 class AppController
 {
@@ -16,6 +17,8 @@ class AppController
 
     public $template_patch = '';
 
+    public $model = array();
+
     /**
      * @var Twig
      */
@@ -25,6 +28,18 @@ class AppController
     public function __construct()
     {
         $this->respons = $_POST; //'respons';
+
+        // connect model
+        $model = $this->model;
+        if (!empty($model)) {
+            include('model' . DS . $model . '.php');
+            if (class_exists($model)) {
+                $this->{$model} = new $model($model);
+            } else {
+                throw new \Exception("Model '$model' not found!!!");
+            }
+        }
+
     }
 
     public function getRespons()
@@ -33,6 +48,6 @@ class AppController
     }
 
     public function test(){
-        return __CLASS__;
+
     }
 }

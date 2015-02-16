@@ -11,10 +11,24 @@ class MainController extends AppController
 {
     private $name = 'Table';
 
+    //public $table = 'ma'
+
+    public $model = 'Main';
+
+
+
     public function index(){
         $view = new View('Main');
-        $view->render('index', array('name' => 'Misha'));
 
+        $view->render('index', array('names' => $this->Main->find()));
+
+    }
+
+    public function test2(){
+        var_dump($this->Main->find());
+
+//        $view = new View('Main');
+//        $view->render('index', array('name' => $this->Main->find()));
     }
 
 }

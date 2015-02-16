@@ -1,6 +1,8 @@
 <?php
-//die('ter');
-define('DS','\\');
+
+define('DS','/');
+include_once('lib'.DS.'Core'.DS.'config.php');
+
 class RouterFactory
 {
     public static function build($controller)
@@ -10,7 +12,7 @@ class RouterFactory
         if (class_exists($class)) {
             return new $class();
         } else {
-            throw new \Exception("Class epsent!!!");
+            throw new \Exception("Controller '$class' not found!!!");
         }
     }
 }
@@ -23,34 +25,26 @@ class App
 //    }
 
     public function run(){
-//        var_dump($url_param);
-//        die('die');
+
         $url = $_SERVER['REQUEST_URI'].'/';
         $url_param = array();
         preg_match_all('([^\/]+)', $url, $url_param); // ([^\/]+)  ([*/]\w+)
         $url_param = $url_param[0];
 
-        $controller = $url_param[1];
-        $action = $url_param[2];
+        $controller = $url_param[0];
+//        $action = $url_param[1];
+        $action = (empty($url_param[1])? 'index' : $url_param[1]);
         $run = RouterFactory::build($controller);
         $run->{$action}();
-//        var_dump($product->getRespons());
-//        echo 'Controller:'.$controller.'<br>action:'.$product->{$action}();
+
     }
 
 }
 
 
-
-
-
-
-
 $app = new App();
 $app->run();
 exit;
-//$test = new MainController();
-//echo $test->getRespons();
 
 
 ?>
