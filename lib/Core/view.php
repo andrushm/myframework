@@ -5,8 +5,9 @@
  * Date: 15.02.15
  * Time: 20:48
  */
-require_once('lib'.DS.'Twig'.DS.'Autoloader.php');
-Twig_Autoloader::register();
+
+namespace  lib\Core\View;
+
 class View
 {
     public $Loader = null;
@@ -15,8 +16,8 @@ class View
 
     public function __construct($viewName){
         if (!empty($viewName)){
-            $this->Loader = new Twig_Loader_Filesystem('view'.DS.$viewName);
-            $this->twig = new Twig_Environment($this->Loader);
+            $this->Loader = new \Twig_Loader_Filesystem('view'.DS.$viewName);
+            $this->twig = new \Twig_Environment($this->Loader);
         };
     }
 

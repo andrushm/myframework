@@ -5,7 +5,7 @@
  * Date: 15.02.15
  * Time: 19:59
  */
-include('controller'.DS.'AppController.php');
+require('controller'.DS.'AppController.php');
 
 class SecondController extends AppController
 {

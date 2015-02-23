@@ -6,6 +6,10 @@
  * Time: 11:58
  */
 
+namespace Model\Main;
+
+use Model\Model\Model;
+
 class Main extends Model {
 
 
