@@ -5,17 +5,27 @@
  * Date: 15.02.15
  * Time: 19:59
  */
-require('controller'.DS.'AppController.php');
+namespace Controller\SecondController;
+
+use Controller\AppController\AppController;
+use Model\Second\Second;
+use lib\Core\View\View;
+
 
 class SecondController extends AppController
 {
-    private $name = 'Phone';
+    private $name = 'Table';
 
+    // autoload model name
     public $model = 'Second';
 
     public function getName()
     {
         return $this->name;
+    }
+
+    public function index(){
+        echo $this->model;
     }
 
     public function test2(){

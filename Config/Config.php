@@ -6,3 +6,9 @@
  * Time: 11:45
  */
 
+$config = [
+    'locale' => 'eng',
+    'controller' => 'Main',
+    'hostname' => 'http://myframework'];
+
+return $config;
